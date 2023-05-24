@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Quest
 {
     // An instance of the Adventurer class is an object that will undergo some challenges
@@ -8,15 +11,18 @@ namespace Quest
         // Note: the constructor is defined below.
         public string Name { get; }
 
+        public Robe myRobe { get; }
+
         // This is a mutable property it has a "get" and a "set"
         //  So it can be read and changed by any code in the application
         public int Awesomeness { get; set; }
 
         // A constructor to make a new Adventurer object with a given name
-        public Adventurer(string name)
+        public Adventurer(string name, Robe ColorfulRobe)
         {
             Name = name;
             Awesomeness = 50;
+            myRobe = ColorfulRobe;
         }
 
 
@@ -44,6 +50,17 @@ namespace Quest
             }
 
             return $"Adventurer, {Name}, is {status}";
+        }
+
+        public string GetDescription()
+        {
+            string colors = "";
+            myRobe.Colors.ForEach(delegate (string color)
+            {
+                colors += $"{color} ";
+            });
+
+            return $"{Name} is wearing a {colors}robe that is {myRobe.Length} inches long";
         }
     }
 }
